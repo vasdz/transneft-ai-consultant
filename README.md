@@ -46,8 +46,8 @@ python -m http.server 8080
 
 7) Связка фронта и API
 - В `index.html` перед подключением скриптов добавь:
-<script>window.API_BASE_URL = 'http://127.0.0.1:8000';</script>
-text
+window.API_BASE_URL = 'http://127.0.0.1:8000';
+
 - Убедись, что `chat.js` и `voice.js` читают `window.API_BASE_URL` для запросов `/api/*`.
 - Если фронт и бэкенд на разных портах, проверь CORS_ORIGINS в `.env`.
 
@@ -71,10 +71,6 @@ python scripts/create_benchmark.py
 python scripts/run_evaluation.py
 
 Результаты: `benchmarks/*.json`, `results/*.json`.
-
-## Демонстрационное видео
-
-Покажи: запуск, 3D‑аватар, 4 сценария анимаций, диалог (5‑7 вопросов), STT/TTS, запуск оценки метрик.
 
 ## Лицензия
 
