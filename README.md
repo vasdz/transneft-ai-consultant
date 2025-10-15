@@ -34,7 +34,7 @@ python scripts/download_models.py --download-llm
 python -m src.transneft_ai_consultant.backend.data_processing.populate_vector_store
 
 5) Запуск backend
-python -m src.transneft_ai_consultant.backend.api
+python -m uvicorn transneft_ai_consultant.backend.api:app --host 127.0.0.1 --port 8000
 
 API доступен на http://127.0.0.1:8000
 
@@ -61,6 +61,14 @@ window.API_BASE_URL = 'http://127.0.0.1:8000';
 - `css/main.css`, `css/animations.css` — базовые стили и анимации.
 
 Расположи 3D‑модели в `src/transneft_ai_consultant/frontend/assets/models/` и укажи корректные пути в `avatar.js`.
+
+## Дополнительные утилиты
+
+- `check_installation.py` — проверка и установка зависимостей  
+- `fix_encoding.py` — корректировка кодировки исходных документов  
+- `question_filter.py` — фильтрация «неответимых» вопросов  
+- `prepare_data.py` — вспомогательная загрузка и предобработка данных  
+- Метрики: `metrics.py`, `metrics_advanced.py`, `metrics_ranking.py`, `rouge_ru.py` 
 
 ## Бенчмарк и оценка
 

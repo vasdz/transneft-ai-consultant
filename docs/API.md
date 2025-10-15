@@ -50,19 +50,6 @@ curl -X POST "http://127.0.0.1:8000/api/voice/tts?text=Привет&speaker=xeni
 
 Ответ: WAV.
 
-## Документы (список)
-GET `/api/documents`
-curl http://127.0.0.1:8000/api/documents
-
-Ответ:
-{
-"total_chunks": 156,
-"documents": [
-{ "source": "PAO-Transneft-reestr.pdf", "chunks": 87 },
-{ "source": "company-info.docx", "chunks": 69 }
-]
-}
-
 
 ## CORS
 Если фронтенд и бэкенд на разных портах/доменных именах, укажи домены в `.env`:
