@@ -3,14 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
-from pathlib import Path
 from .rag.hybrid_search import hybrid_search, init_hybrid_search
+from typing import Optional
+
 import uvicorn
 import mimetypes
 import logging
-from typing import Optional
 
-# Импорты
 from .config import ROOT_DIR, CORS_ORIGINS, FRONTEND_DIR
 from .rag.pipeline import rag_answer
 from .api_voice import router as voice_router
@@ -30,7 +29,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
@@ -53,8 +51,6 @@ class ChatResponse(BaseModel):
     retrieved_contexts: list = []
     scores: list = []
     audioUrl: Optional[str] = None
-
-# === API ENDPOINTS ===
 
 app.include_router(voice_router)
 
@@ -134,8 +130,6 @@ if FRONTEND_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static_all")
     logger.info(f"  OK Static (all): /static/*")
 
-
-    # Главная страница
     @app.get("/")
     async def serve_index():
         index_path = FRONTEND_DIR / "index.html"
@@ -146,8 +140,6 @@ if FRONTEND_DIR.exists():
             logger.error(f"index.html not found: {index_path}")
             return {"error": "index.html not found", "path": str(index_path)}
 
-
-    # Favicon
     @app.get("/favicon.ico")
     async def favicon():
         favicon_paths = [

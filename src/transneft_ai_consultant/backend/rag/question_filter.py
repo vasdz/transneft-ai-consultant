@@ -2,12 +2,12 @@
 Продвинутая система фильтрации нерелевантных вопросов.
 Многоуровневая защита от off-topic запросов.
 """
-
 import re
-from typing import Tuple, Dict
-from sentence_transformers import SentenceTransformer
 import numpy as np
 import logging
+
+from typing import Tuple, Dict
+from sentence_transformers import SentenceTransformer
 
 # ═══════════════════════════════════════════════════════════════════════════
 # УРОВЕНЬ 1: Чёрные списки (моментальная блокировка)

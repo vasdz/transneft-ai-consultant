@@ -1,6 +1,5 @@
 from llama_cpp import Llama
 import torch
-import time
 
 LLM = None
 
@@ -27,7 +26,7 @@ def get_llm():
 def ask_llm(prompt: str, max_tokens: int = 512, temperature: float = 0.3) -> str:
     llm = get_llm()
 
-    # КРИТИЧНО: правильное форматирование для Saiga
+    # Правильное форматирование для Saiga
     formatted_prompt = f"""<s>system
 Ты - официальный AI-консультант ПАО «Транснефть». Отвечай кратко и по делу.</s>
 <s>user
@@ -40,7 +39,7 @@ def ask_llm(prompt: str, max_tokens: int = 512, temperature: float = 0.3) -> str
             formatted_prompt,
             max_tokens=max_tokens,
             temperature=temperature,
-            stop=["</s>", "<s>"],  # ДОБАВЛЕНО
+            stop=["</s>", "<s>"],
             echo=False
         )
 

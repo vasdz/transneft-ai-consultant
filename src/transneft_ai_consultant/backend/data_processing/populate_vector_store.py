@@ -1,7 +1,6 @@
-# backend/data_processing/populate_vector_store.py
-from .chunk_text import chunk_by_tokens, count_tokens
 import uuid
 
+from .chunk_text import chunk_by_tokens, count_tokens
 
 def index_sections_to_chroma(sections, chroma_client, collection_name="transneft_docs"):
     """

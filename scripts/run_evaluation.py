@@ -1,7 +1,7 @@
-# run_evaluation.py
 import json
 import sys
 import os
+
 from pathlib import Path
 from tqdm import tqdm
 

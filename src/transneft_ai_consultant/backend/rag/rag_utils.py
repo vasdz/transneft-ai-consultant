@@ -12,10 +12,8 @@ def build_rag_prompt(question: str, contexts: list, tokenizer, n_ctx_limit: int 
             selected.append(ctx)
             total += tcount
         else:
-            # try to include a truncated version (take last part or first part)
             allowed = max_for_context - total
-            if allowed > 50:  # minimal useful context
-                # crude truncation: take first N tokens
+            if allowed > 50:
                 if hasattr(tokenizer, "encode") and hasattr(tokenizer, "decode"):
                     enc = tokenizer.encode(ctx['text'])
                     truncated = tokenizer.decode(enc[:allowed])
@@ -24,7 +22,6 @@ def build_rag_prompt(question: str, contexts: list, tokenizer, n_ctx_limit: int 
                 selected.append({'id': ctx['id'], 'text': truncated, 'score': ctx.get('score')})
                 total += allowed
             break
-    # assemble final prompt
     ctx_texts = "\n\n---\n\n".join([f"[source: {c['id']}]\n{c['text']}" for c in selected])
     prompt = f"Вопрос: {question}\n\nКонтекст:\n{ctx_texts}\n\nОтветь коротко и по делу."
     return prompt, [c['id'] for c in selected]

@@ -3,11 +3,9 @@ from typing import List
 import numpy as np
 from .vector_store import query_documents, collection
 
-# Глобальные переменные для BM25 индекса
 _bm25_index = None
 _bm25_corpus = None
 _doc_ids = None
-
 
 def build_bm25_index():
     """Строит BM25 индекс из всех документов в ChromaDB."""
@@ -48,7 +46,7 @@ def hybrid_search(question: str, top_k: int = 10, alpha: float = 0.7) -> list:
         alpha: Вес dense search (0.7 = 70% векторный, 30% BM25)
     """
 
-    # 1. Строим BM25 индекс если нужно
+    # 1. Строим BM25 индекс
     if _bm25_index is None:
         build_bm25_index()
 

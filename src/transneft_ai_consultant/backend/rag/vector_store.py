@@ -1,9 +1,10 @@
 import chromadb
+import hashlib
+
 from typing import List
 from src.transneft_ai_consultant.backend.rag.embedder import embed_texts
 from tqdm import tqdm
 from functools import lru_cache
-import hashlib
 
 @lru_cache(maxsize=1000)
 def query_documents_cached(question_hash: str, top_k: int):

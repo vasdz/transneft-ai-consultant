@@ -1,5 +1,3 @@
-// animation-sync.js - ФИНАЛЬНАЯ ВЕРСИЯ С EXIT INTENT
-
 console.log('🎯 Advanced Animation-Sync модуль загружен');
 
 class AvatarAnimationManager {
@@ -94,7 +92,6 @@ class AvatarAnimationManager {
         document.addEventListener('click', resetInactivityTimer);
         resetInactivityTimer();
 
-        // ✅ НОВЫЙ КОД: Exit Intent Detection
         let farewellTriggered = false;
 
         document.addEventListener('mouseout', (e) => {

@@ -1,4 +1,3 @@
-# backend/data_processing/chunk_text.py
 import re
 
 try:
@@ -130,7 +129,6 @@ def chunk_sections(sections: list, strategy: str = "smart") -> list:
         text_chunks = chunk_by_tokens(content, max_tokens=400, overlap=80)
 
         for i, chunk_text in enumerate(text_chunks):
-            # ДОБАВЛЯЕМ ЗАГОЛОВОК К КАЖДОМУ ЧАНКУ
             if strategy == "smart" and title and title != "ROOT":
                 full_chunk = f"Раздел: {title}\n\n{chunk_text}"
             else:

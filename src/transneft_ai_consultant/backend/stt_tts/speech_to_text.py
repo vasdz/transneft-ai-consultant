@@ -1,17 +1,14 @@
 import whisper
-import numpy as np
-from pathlib import Path
 import logging
 import warnings
 
-# Подавляем предупреждения FP16
 warnings.filterwarnings("ignore", category=UserWarning, module="whisper")
 
 logger = logging.getLogger(__name__)
 
 
 class SpeechToText:
-    """Класс для распознавания речи с помощью OpenAI Whisper (on-premise)."""
+    """Класс для распознавания речи с помощью Whisper (on-premise)."""
 
     def __init__(self, model_size: str = "base", device: str = "auto"):
         if device == "auto":
@@ -106,8 +103,6 @@ class SpeechToText:
                 "error": str(e),
             }
 
-
-# Singleton
 _stt_instance = None
 
 def get_stt_instance(model_size: str = "base", device: str = "auto") -> SpeechToText:

@@ -1,16 +1,13 @@
-# backend/config.py
 from pathlib import Path
 
-# --- Определение ROOT_DIR ---
 ROOT_DIR = Path(__file__).parent.parent.parent.parent.absolute()
 
-# --- Пути ---
 SRC_DIR = ROOT_DIR / "src"
 BACKEND_DIR = SRC_DIR / "transneft_ai_consultant" / "backend"
 FRONTEND_DIR = SRC_DIR / "transneft_ai_consultant" / "frontend"
 
 DATA_DIR = BACKEND_DIR / "data"
-DOCX_PATH = DATA_DIR / "PAO_Transneft_reestr.docx"  # ИСПРАВЛЕНО: .docs → .docx
+DOCX_PATH = DATA_DIR / "PAO_Transneft_reestr.docx"
 
 DB_DIR = ROOT_DIR / "db"
 MODELS_DIR = ROOT_DIR / "models"

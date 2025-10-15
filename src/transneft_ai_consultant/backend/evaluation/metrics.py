@@ -1,9 +1,10 @@
+import razdel
+import pymorphy2
+
 from sentence_transformers import SentenceTransformer, util
 from rouge_score import rouge_scorer
 from evaluate import load
 from typing import List
-import razdel
-import pymorphy2
 
 # --- Инициализация моделей и метрик ---
 print("Инициализация метрик...")
@@ -17,7 +18,6 @@ print("Метрики инициализированы.")
 def stem_text_russian(text: str) -> str:
     """Токенизирует текст и приводит слова к нормальной форме (лемматизация)."""
     tokens = [token.text for token in razdel.tokenize(text.lower())]
-    # ИСПРАВЛЕНО: используем объект morph, а не библиотеку pymorphy2
     lemmas = [morph.parse(token)[0].normal_form for token in tokens]
     return " ".join(lemmas)
 

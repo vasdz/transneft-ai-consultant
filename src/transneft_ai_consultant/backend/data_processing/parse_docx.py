@@ -1,9 +1,8 @@
-
-from docx import Document
 import os
 import uuid
+
+from docx import Document
 from typing import List, Dict
-from xml.etree import ElementTree as ET
 
 NS = {
     'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -39,7 +38,6 @@ def read_docx_sections(path: str) -> List[Dict]:
     doc = Document(path)
     base_name = os.path.basename(path)
     sections = []
-    # initialize current section with metadata
     current = {
         "title": "ROOT",
         "content": "",
@@ -54,12 +52,9 @@ def read_docx_sections(path: str) -> List[Dict]:
         if not text:
             continue
 
-        # Heading styles: Heading 1, Heading 2, etc.
         if style_name and style_name.lower().startswith("heading"):
-            # store previous if non-empty
             if current and (current.get("content") or current.get("title")):
                 sections.append(current)
-            # start new section with metadata
             current = {
                 "title": text,
                 "content": "",
@@ -70,19 +65,13 @@ def read_docx_sections(path: str) -> List[Dict]:
             }
             continue
 
-        # lists
         if is_list_paragraph(para):
             current["content"] += "\n- " + text
             continue
 
-        # normal paragraph
         current["content"] += ("\n" if current["content"] else "") + text
-
-    # append last
     if current and (current["content"] or current["title"]):
         sections.append(current)
-
-    # tables
     for table in doc.tables:
         rows = []
         for r in table.rows:
@@ -96,7 +85,6 @@ def read_docx_sections(path: str) -> List[Dict]:
             "section_id": uuid.uuid4().hex
         })
 
-    # images (saved to /data/images)
     imgs = extract_images(doc, out_dir=os.path.join(os.path.dirname(path), "images"))
     for p in imgs:
         sections.append({

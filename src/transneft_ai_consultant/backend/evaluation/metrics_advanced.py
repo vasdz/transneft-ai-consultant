@@ -1,17 +1,8 @@
-# metrics_advanced.py
-"""
-Продвинутые метрики для оценки качества QA системы
-Включает BLEURT-20 и SemanticAnswerSimilarity (BGE-M3)
-"""
-
-from typing import List, Tuple
 import torch
-from sentence_transformers import SentenceTransformer, util
 import numpy as np
 
-# ============================================================================
-# BLEURT-20 Integration
-# ============================================================================
+from typing import List, Tuple
+from sentence_transformers import SentenceTransformer, util
 
 _bleurt_model = None
 
@@ -50,11 +41,6 @@ def calculate_bleurt_score(predictions: List[str], references: List[str]) -> flo
     except Exception as e:
         print(f"⚠️ Ошибка при расчете BLEURT: {e}")
         return 0.0
-
-
-# ============================================================================
-# SemanticAnswerSimilarity with BGE-M3
-# ============================================================================
 
 _bge_model = None
 

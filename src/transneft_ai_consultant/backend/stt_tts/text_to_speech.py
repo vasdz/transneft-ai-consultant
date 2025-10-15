@@ -1,9 +1,3 @@
-# backend/stt_tts/text_to_speech.py
-"""
-Text-to-Speech модуль на основе Silero TTS.
-100% on-premise, работает offline.
-"""
-
 import torch
 import re
 from num2words import num2words
@@ -25,7 +19,6 @@ SPEAKER_MAPPING = {
 
 
 class TextToSpeech:
-    """Класс для синтеза речи с помощью Silero TTS."""
 
     def __init__(
             self,
@@ -37,7 +30,7 @@ class TextToSpeech:
         Args:
             language: язык ('ru', 'en', 'de', 'es', 'fr')
             speaker: голос для русского:
-                - 'kseniya' (женский) - РЕКОМЕНДУЕТСЯ
+                - 'kseniya' (женский)
                 - 'aidar' (мужской)
                 - 'baya' (женский)
                 - 'irina' (женский)
@@ -59,8 +52,6 @@ class TextToSpeech:
         logger.info(f"🔊 Загрузка Silero TTS ({language}, speaker={self.speaker})...")
 
         try:
-            # ИСПРАВЛЕНО: Используем прямую загрузку модели через torch.package
-            # Ссылки на модели: https://models.silero.ai/models/tts/
             model_urls = {
                 'ru': 'https://models.silero.ai/models/tts/ru/v4_ru.pt',
                 'en': 'https://models.silero.ai/models/tts/en/v3_en.pt',
@@ -183,8 +174,6 @@ class TextToSpeech:
             logger.error(f"❌ Ошибка синтеза: {e}", exc_info=True)
             raise
 
-
-# Singleton
 _tts_instance = None
 
 
@@ -216,8 +205,6 @@ def list_available_speakers() -> dict:
         ]
     }
 
-
-# Тест
 if __name__ == "__main__":
     import sys
 

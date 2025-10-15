@@ -1,10 +1,10 @@
 import json
-from tqdm import tqdm
 import chromadb
 import random
-from pathlib import Path
 
-# Импорт LLM (убедись, что путь правильный)
+from pathlib import Path
+from tqdm import tqdm
+
 try:
     from backend.rag.llm import ask_llm
 except ImportError:

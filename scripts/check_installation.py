@@ -1,12 +1,9 @@
-"""Проверка всех зависимостей проекта."""
-
 import sys
+
 from pathlib import Path
 
-# Добавляем корень проекта в PYTHONPATH
 project_root = Path(__file__).parent.parent.absolute()
 sys.path.insert(0, str(project_root))
-
 
 def check_import(module_name, package_name=None):
     """Проверяет импорт модуля."""

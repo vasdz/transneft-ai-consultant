@@ -1,15 +1,9 @@
-/* === ПРОФЕССИОНАЛЬНЫЕ АНИМАЦИИ АВАТАРА === */
-
-/* Исправляем CSS переменные на существующие */
 :root {
     /* Используем существующие переменные из main.css */
     --assistant-bg: var(--light-gray);
     --primary-color: var(--primary-blue);
 }
 
-/* === АНИМАЦИИ ИНТЕРФЕЙСА === */
-
-/* Пульсация статуса */
 .status-indicator .status-dot {
     animation: statusPulse 2s infinite ease-in-out;
 }
@@ -60,7 +54,6 @@
     }
 }
 
-/* === ПРОФЕССИОНАЛЬНЫЙ ИНДИКАТОР ПЕЧАТАНИЯ === */
 .typing-indicator {
     display: flex;
     align-items: center;
@@ -279,7 +272,6 @@
     }
 }
 
-/* === HOVER ЭФФЕКТЫ ДЛЯ СООБЩЕНИЙ === */
 .message:hover .play-audio-btn {
     opacity: 1;
     transform: scale(1.1);

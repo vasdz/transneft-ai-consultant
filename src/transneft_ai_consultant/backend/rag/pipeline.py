@@ -1,4 +1,6 @@
-# pipeline.py
+import logging
+import json
+
 from .vector_store import query_documents
 from .llm import ask_llm
 from .prompts import get_rag_prompt
@@ -6,8 +8,6 @@ from ..config import TOP_K_RETRIEVER
 from sentence_transformers import CrossEncoder
 from .hybrid_search import hybrid_search
 from .question_filter import is_question_relevant_advanced, get_rejection_message_advanced
-import logging
-import json
 from datetime import datetime
 
 _reranker = None
@@ -110,7 +110,6 @@ def compress_contexts(question: str, contexts: list, compression_ratio: float = 
 
     return compressed
 
-
 def adaptive_retrieval(question: str) -> int:
     '''Динамически выбирает top_k в зависимости от типа вопроса.'''
     # Для фактических вопросов нужно меньше контекста
@@ -128,7 +127,6 @@ def adaptive_retrieval(question: str) -> int:
 
 def ensemble_answer(question: str, contexts: list, n_samples: int = 3) -> str:
     '''Генерирует несколько ответов и выбирает наиболее согласованный.'''
-    from collections import Counter
     import re
 
     answers = []

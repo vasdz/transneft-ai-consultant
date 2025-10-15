@@ -1,6 +1,7 @@
-from rouge_score import rouge_scorer, scoring
 import razdel  # Библиотека для работы с русскими текстами
 import pymorphy2  # Морфологический анализатор для русского языка
+
+from rouge_score import rouge_scorer, scoring
 
 # Создаем морфологический анализатор
 morph = pymorphy2.MorphAnalyzer()

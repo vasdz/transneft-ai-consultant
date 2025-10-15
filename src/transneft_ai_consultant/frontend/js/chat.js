@@ -145,7 +145,6 @@ this.addMessageToChat('assistant', answer, messageData);
             playBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
             playBtn.title = 'Прослушать ответ';
 
-            // ИНЛАЙН СТИЛИ для гарантии видимости
             playBtn.style.cssText = `
                 position: absolute;
                 bottom: 5px;
@@ -169,7 +168,6 @@ this.addMessageToChat('assistant', answer, messageData);
             const savedApiUrl = this.apiUrl;
             const savedContent = content;
 
-            // ТЕСТ: Добавляем onclick прямо в HTML
             playBtn.setAttribute('data-text', content.substring(0, 50));
             const audioUrl = messageData?.audioUrl || null;  // ✅ Определяем ДО использования
             playBtn.setAttribute('data-audiourl', audioUrl || 'null');
@@ -184,10 +182,6 @@ this.addMessageToChat('assistant', answer, messageData);
     try {
         playBtn.disabled = true;
         playBtn.style.opacity = '0.5';
-
-        // ❌ УДАЛИ: if (audioUrl) { ... }
-        // ✅ ВСЕГДА используй TTS (audioUrl почти всегда null)
-
         console.log('[TTS] Генерируем аудио через TTS...');
         const ttsUrl = `${this.apiUrl}/api/voice/tts?text=${encodeURIComponent(content)}&speaker=xenia&return_file=true`;
 
@@ -254,7 +248,6 @@ this.addMessageToChat('assistant', answer, messageData);
         console.log('[addMessageToChat] ===== КОНЕЦ =====');
         console.log('[addMessageToChat] Сообщение добавлено в DOM');
 
-        // ТЕСТ: Проверяем что кнопка реально в DOM
         if (role === 'assistant' || role === 'system') {
             setTimeout(() => {
                 const buttons = document.querySelectorAll('.play-audio-btn');
@@ -326,7 +319,6 @@ function displayAnswerWithSources(answer, sources) {
     answerText.innerHTML = answer;
     messageContent.appendChild(answerText);
 
-    // ✅ ДОБАВЬ КНОПКУ TTS ЗДЕСЬ (ДО источников)
     console.log('[displayAnswerWithSources] Создаем кнопку TTS...');
     const playBtn = document.createElement('button');
     playBtn.className = 'play-audio-btn';
@@ -350,7 +342,6 @@ function displayAnswerWithSources(answer, sources) {
         z-index: 1000;
     `;
 
-    // ✅ ОБРАБОТЧИК КЛИКА (используй window.chatService для доступа к apiUrl)
     playBtn.onclick = async function(event) {
         console.log('[TTS] Кнопка нажата в displayAnswerWithSources!');
 
@@ -399,9 +390,7 @@ function displayAnswerWithSources(answer, sources) {
 
     messageContent.appendChild(playBtn);
     console.log('[displayAnswerWithSources] Кнопка TTS добавлена');
-    // ✅ КОНЕЦ БЛОКА TTS
 
-    // Источники (ниже кнопки)
     if (sources && sources.length > 0) {
         const sourcesContainer = document.createElement('div');
         sourcesContainer.className = 'sources-container';

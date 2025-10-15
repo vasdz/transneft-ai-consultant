@@ -1,5 +1,3 @@
-// main.js - С ПОДДЕРЖКОЙ ГОЛОСОВОГО ВВОДА
-
 import { AvatarController } from './avatar.js';
 import { ChatService } from './chat.js';
 

@@ -1,8 +1,3 @@
-/**
- * Голосовой модуль для взаимодействия с AI консультантом
- * Версия 2.0 с улучшенной обработкой ошибок
- */
-
 class VoiceInterface {
     constructor(apiBaseUrl = 'http://localhost:8000/api/voice') {
         this.apiBaseUrl = apiBaseUrl;
@@ -32,10 +27,6 @@ class VoiceInterface {
             throw error;
         }
     }
-
-    /**
-     * Начать запись голоса
-     */
     async startRecording() {
         if (this.isRecording) {
             console.warn('Запись уже идет');

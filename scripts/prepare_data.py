@@ -1,10 +1,7 @@
-# --- ИСПРАВЛЕННЫЕ ИМПОРТЫ ---
-# Импортируем код как установленный пакет
 from transneft_ai_consultant.backend.data_processing.parse_docx import read_docx_sections
 from transneft_ai_consultant.backend.data_processing.chunk_text import chunk_sections
 from transneft_ai_consultant.backend.rag.vector_store import add_documents, get_collection_size
 from transneft_ai_consultant.backend.config import DOCX_PATH
-# -----------------------------
 
 def main():
     print("Запуск процесса индексации документов...")

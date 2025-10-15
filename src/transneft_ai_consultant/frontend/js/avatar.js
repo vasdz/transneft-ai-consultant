@@ -208,7 +208,6 @@ export class AvatarController {
 
     const fadeDuration = 0.2; // Длительность плавного перехода (в секундах)
 
-    // Если есть старое действие, плавно переходим из него
     if (oldAction) {
         newAction.play(); // Запускаем новое действие
         oldAction.crossFadeTo(newAction, fadeDuration, false);
@@ -219,9 +218,6 @@ export class AvatarController {
 
     this.currentAction = newAction;
 
-    // --- НАДЕЖНЫЙ ПЕРЕХОД В IDLE ЧЕРЕЗ setTimeout ---
-
-    // Отменяем предыдущий запланированный переход, если он был
     if (this._idleTimeout) {
         clearTimeout(this._idleTimeout);
         this._idleTimeout = null;
@@ -231,8 +227,6 @@ export class AvatarController {
     if (newAction.loop === THREE.LoopOnce) {
         const clipDuration = newAction.getClip().duration;
 
-        // Запускаем переход в idle за `fadeDuration` секунд до конца текущей анимации,
-        // чтобы создать наложение и избежать "провала"
         const delay = (clipDuration - fadeDuration) * 1000;
 
         if (delay > 0) {
