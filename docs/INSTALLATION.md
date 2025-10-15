@@ -20,7 +20,7 @@ pip install --upgrade pip
 cp .env.example .env
 
 Рекомендуемые поля:
-LLM_MODEL=IlyaGusev/saiga_llama3_8b
+LLM_MODEL=IlyaGusev/saiga_llama3_7b.Q4_K_M
 EMBEDDING_MODEL=BAAI/bge-m3
 EMBEDDING_DEVICE=cpu|cuda
 CHROMA_PATH=db/chroma

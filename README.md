@@ -19,7 +19,7 @@ source .venv/bin/activate # Windows: .venv\Scripts\activate
 cp .env.example .env
 
 рекомендуемые правки:
-LLM_MODEL=IlyaGusev/saiga_llama3_8b
+LLM_MODEL=IlyaGusev/saiga_llama3_7b.Q4_K_M
 EMBEDDING_DEVICE=cpu|cuda
 CORS_ORIGINS=http://localhost:8080,http://127.0.0.1:8080,http://localhost:8000,http://127.0.0.1:8000
 
