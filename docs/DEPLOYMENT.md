@@ -22,7 +22,6 @@ server {
 listen 80;
 server_name transneft-ai.local;
 
-text
 root /var/www/transneft-ai/frontend;
 index index.html;
 
@@ -39,14 +38,10 @@ location / {
 }
 }
 
-text
-
 Активация:
 sudo ln -s /etc/nginx/sites-available/transneft-ai /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
-
-text
 
 Важно:
 - Убери `<script>window.API_BASE_URL=...</script>` или поставь `window.API_BASE_URL=''` (пусто), если фронтенд и бэкенд под одним доменом — тогда запросы идут на относительный `/api/...`.
@@ -69,15 +64,11 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 
-text
-
 Активировать:
 sudo systemctl daemon-reload
 sudo systemctl enable transneft-ai
 sudo systemctl start transneft-ai
 sudo systemctl status transneft-ai
-
-text
 
 ## HTTPS (рекомендуется)
 
@@ -92,8 +83,6 @@ text
 tail -f rag_demo.log # логи приложения
 sudo journalctl -u transneft-ai -f # логи сервиса
 
-text
-
 ## Обновления
 cd /opt/transneft-ai-consultant
 git pull origin main
@@ -102,11 +91,7 @@ pip install -r requirements.txt --upgrade
 sudo systemctl restart transneft-ai
 sudo systemctl reload nginx
 
-text
-
 ## Проверка
 curl http://127.0.0.1:8000/api/health
 
 Открой в браузере http://transneft-ai.local
-text
-undefined

@@ -14,7 +14,6 @@
 1) Окружение и зависимости
 python -m venv .venv
 source .venv/bin/activate # Windows: .venv\Scripts\activate
-text
 
 2) Конфигурация
 cp .env.example .env
@@ -23,7 +22,6 @@ cp .env.example .env
 LLM_MODEL=IlyaGusev/saiga_llama3_8b
 EMBEDDING_DEVICE=cpu|cuda
 CORS_ORIGINS=http://localhost:8080,http://127.0.0.1:8080,http://localhost:8000,http://127.0.0.1:8000
-text
 
 3) Загрузка моделей
 python scripts/download_models.py
@@ -31,26 +29,20 @@ python scripts/download_models.py
 опционально локальная LLM:
 python scripts/download_models.py --download-llm
 
-text
-
 4) Подготовка базы знаний
 помести .docx/.pdf/.txt в src/transneft_ai_consultant/backend/data/.docs/
 python -m src.transneft_ai_consultant.backend.data_processing.populate_vector_store
-
-text
 
 5) Запуск backend
 python -m src.transneft_ai_consultant.backend.api
 
 API доступен на http://127.0.0.1:8000
-text
 
 6) Запуск frontend (вариант для разработки)
 из папки src/transneft_ai_consultant/frontend/
 python -m http.server 8080
 
 открой http://127.0.0.1:8080
-text
 
 7) Связка фронта и API
 - В `index.html` перед подключением скриптов добавь:
@@ -75,11 +67,9 @@ text
 - Генерация:
 python scripts/create_benchmark.py
 
-text
 - Оценка:
 python scripts/run_evaluation.py
 
-text
 Результаты: `benchmarks/*.json`, `results/*.json`.
 
 ## Демонстрационное видео

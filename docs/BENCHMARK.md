@@ -15,8 +15,6 @@
 "metadata": { "source": "PAO-Transneft-reestr.pdf", "page": 1 }
 }
 
-text
-
 Негативные (20 шт):
 {
 "question": "Какова средняя зарплата сотрудников Транснефть?",
@@ -25,17 +23,13 @@ text
 "reason": "Информация отсутствует в предоставленных документах"
 }
 
-text
-
 ## Генерация и оценка
 - Генерация:
 python scripts/create_benchmark.py
 
-text
 - Оценка:
 python scripts/run_evaluation.py
-
-text
+- 
 Результаты: `benchmarks/*.json`, `results/*.json`.
 
 ## Метрики

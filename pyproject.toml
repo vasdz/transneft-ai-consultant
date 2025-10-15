@@ -13,9 +13,8 @@ authors = [
   { name = "Labin Alexander", email = "labin.schura@yandex.ru" },
 ]
 classifiers = [
-  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.12",
   "Operating System :: Microsoft :: Windows",
-  "Operating System :: POSIX :: Linux",
 ]
 
 # минимальные зависимости (легкая база) — массив строк
