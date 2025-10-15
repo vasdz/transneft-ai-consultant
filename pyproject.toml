@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "transneft_ai_consultant"
+version = "0.1.0"
+description = "Digital consultant for Transneft"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT License" }
+authors = [
+  { name = "Labin Alexander", email = "labin.schura@yandex.ru" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3.10",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+]
+
+# минимальные зависимости (легкая база) — массив строк
+dependencies = [
+  "fastapi>=0.95.0",
+  "uvicorn[standard]>=0.21.0",
+  "python-multipart>=0.0.6",
+  "python-docx>=0.8.11",
+  "chromadb>=0.4.0",
+  "requests>=2.31.0",
+  "numpy>=1.21.0,<2.0",
+  "pandas>=2.0.0",
+  "tqdm>=4.66.0",
+  "nltk>=3.8",
+  "razdel>=0.5.0",
+  "pymorphy2>=0.9.1",
+  "scikit-learn>=1.3.0",
+  "SpeechRecognition>=3.9.0",
+  "pydub>=0.25.1",
+  "websockets>=11.0",
+  "rouge-score>=0.1.2",
+]
+
+[project.optional-dependencies]
+heavy = [
+  "sentence-transformers>=2.2.0",
+  "transformers>=4.35.0",
+  "evaluate>=0.4.0",
+  # torch должен устанавливаться вручную (см. instructions), но оставим сюда для удобства
+  "torch>=2.0.0",
+  "accelerate>=0.20.0",
+]
+
+stt_tts = [
+  "faster-whisper>=0.10.0",
+  "silero>=0.4.1",
+  "soundfile>=0.12.1",
+  "librosa>=0.10.0",
+  "num2words>=0.5.12",
+  "onnxruntime>=1.16.0",
+]
+
+stt_tts_gpu = [
+  "faster-whisper[cuda]>=0.10.0",
+]
+
+dev = [
+  "pytest",
+  "black",
+  "isort",
+  "mypy",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 100

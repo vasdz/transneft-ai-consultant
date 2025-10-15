@@ -1,0 +1,215 @@
+# ==========================================
+# PYTHON
+# ==========================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# ==========================================
+# VIRTUAL ENVIRONMENTS
+# ==========================================
+
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# ==========================================
+# ENVIRONMENT VARIABLES
+# ==========================================
+
+.env
+.env.local
+.env.*.local
+
+# ==========================================
+# DATABASE
+# ==========================================
+
+# ChromaDB
+db/chroma/
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================================
+# MODELS (Large Files)
+# ==========================================
+
+# LLM Models
+src/transneft_ai_consultant/backend/models/*
+!src/transneft_ai_consultant/backend/models/.gitkeep
+
+# Model files
+*.bin
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.gguf
+*.h5
+
+# ==========================================
+# LOGS
+# ==========================================
+
+*.log
+logs/
+rag_demo.log
+
+# ==========================================
+# DATA & DOCUMENTS
+# ==========================================
+
+# Raw data
+src/transneft_ai_consultant/backend/data/.docs/*
+!src/transneft_ai_consultant/backend/data/.docs/.gitkeep
+
+# Processed data
+src/transneft_ai_consultant/backend/data/processed/
+
+# ==========================================
+# RESULTS & BENCHMARKS
+# ==========================================
+
+# Benchmark results
+benchmarks/*.json
+!benchmarks/.gitkeep
+
+# Evaluation results
+results/*.json
+!results/.gitkeep
+
+# ==========================================
+# IDE & EDITORS
+# ==========================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ==========================================
+# OS
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ==========================================
+# TEMPORARY FILES
+# ==========================================
+
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# ==========================================
+# AUDIO & VIDEO (Generated)
+# ==========================================
+
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aac
+
+# ==========================================
+# MISC
+# ==========================================
+
+# Jupyter
+.ipynb_checkpoints/
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
