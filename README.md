@@ -80,6 +80,13 @@ python scripts/run_evaluation.py
 
 Результаты: `benchmarks/*.json`, `results/*.json`.
 
+## Картинки проекта:
+<img width="1280" height="774" alt="image" src="https://github.com/user-attachments/assets/ab4ed75e-8f65-4cd4-9460-bcda90d54ec4" />
+<img width="1280" height="803" alt="image" src="https://github.com/user-attachments/assets/1f936298-847a-4190-800f-7ddcf8b16437" />
+<img width="1280" height="747" alt="image" src="https://github.com/user-attachments/assets/7b1f0eee-fe15-4a4e-bd34-969e09ac729f" />
+<img width="1280" height="759" alt="image" src="https://github.com/user-attachments/assets/b755f549-03e5-4746-88d2-180516dfe914" />
+
+
 ## Лицензия
 
 MIT (см. LICENSE).
