@@ -88,6 +88,11 @@ python scripts/run_evaluation.py
 <img width="1280" height="747" alt="image" src="https://github.com/user-attachments/assets/7b1f0eee-fe15-4a4e-bd34-969e09ac729f" />
 <img width="1280" height="759" alt="image" src="https://github.com/user-attachments/assets/b755f549-03e5-4746-88d2-180516dfe914" />
 
+## Ссылки на видео(Яндекс диск):
+
+https://disk.yandex.ru/i/4MZbIikUZ_c_hw
+
+https://disk.yandex.ru/i/sS1dzmvV9_AXmQ
 
 ## Лицензия
 
