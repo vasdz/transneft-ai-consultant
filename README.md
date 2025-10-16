@@ -33,7 +33,7 @@ python scripts/download_models.py --download-llm
 помести .docx/.pdf/.txt в src/transneft_ai_consultant/backend/data/.docs/
 python -m src.transneft_ai_consultant.backend.data_processing.populate_vector_store
 
-5) Запуск backend
+5) Запуск backend и frontend 
 python -m uvicorn transneft_ai_consultant.backend.api:app --host 127.0.0.1 --port 8000
 
 API доступен на http://127.0.0.1:8000
@@ -67,8 +67,10 @@ window.API_BASE_URL = 'http://127.0.0.1:8000';
 - `check_installation.py` — проверка и установка зависимостей  
 - `fix_encoding.py` — корректировка кодировки исходных документов  
 - `question_filter.py` — фильтрация «неответимых» вопросов  
-- `prepare_data.py` — вспомогательная загрузка и предобработка данных  
-- Метрики: `metrics.py`, `metrics_advanced.py`, `metrics_ranking.py`, `rouge_ru.py` 
+- `prepare_data.py` — вспомогательная загрузка и предобработка данных
+- `extract_doc_ids.py` — создает словарь всех уникальных документов, которые были найдены системой
+- `annotate_relevant_docs.py` — определяет, какие документы являются релевантными
+- Метрики: `metrics.py`, `metrics_advanced.py`, `metrics_ranking.py`, `rouge_ru.py`, `pipeline.py`
 
 ## Бенчмарк и оценка
 
