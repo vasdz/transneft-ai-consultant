@@ -156,15 +156,6 @@ if FRONTEND_DIR.exists():
 else:
     logger.error(f"Frontend directory NOT FOUND: {FRONTEND_DIR}")
 
-
-    @app.on_event("startup")
-    async def startup_event():
-        '''Инициализация при старте приложения.'''
-        print("🔍 Инициализация гибридного поиска...")
-        init_hybrid_search()
-        print("✅ Гибридный поиск готов")
-
-
 if __name__ == "__main__":
     print(f"\n{'=' * 60}")
     print(f"Starting Transneft AI Assistant")

@@ -7,7 +7,7 @@ BACKEND_DIR = SRC_DIR / "transneft_ai_consultant" / "backend"
 FRONTEND_DIR = SRC_DIR / "transneft_ai_consultant" / "frontend"
 
 DATA_DIR = BACKEND_DIR / "data"
-DOCX_PATH = DATA_DIR / "PAO_Transneft_reestr.docx"
+DOCX_PATH = DATA_DIR / "PAO Transneft reestr.docx"
 
 DB_DIR = ROOT_DIR / "db"
 MODELS_DIR = ROOT_DIR / "models"
@@ -22,11 +22,11 @@ RERANKER_MODEL_NAME = 'cross-encoder/ms-marco-MiniLM-L-6-v2'
 
 # --- RAG ---
 COLLECTION_NAME = "transneft_docs"
-TOP_K_RETRIEVER = 3
+TOP_K_RETRIEVER = 5
 INITIAL_TOP_K = 10
 MIN_SIMILARITY_THRESHOLD = 0.3
-CHUNK_SIZE = 400
-CHUNK_OVERLAP = 80
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 200
 
 # --- API ---
 CORS_ORIGINS = ["*"]

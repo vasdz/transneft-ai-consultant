@@ -8,7 +8,7 @@ _bleurt_model = None
 
 
 def get_bleurt_model():
-    """Загружает BLEURT-20 модель (или альтернативу)"""
+    """Загружает BLEURT-20 модель """
     global _bleurt_model
     if _bleurt_model is None:
         try:
@@ -24,26 +24,6 @@ def get_bleurt_model():
             print(f"⚠️ Не удалось загрузить BLEURT: {e}")
             _bleurt_model = None
     return _bleurt_model
-
-
-def calculate_bleurt_score(predictions: List[str], references: List[str]) -> float:
-    """Вычисляет BLEURT-20 score (или BERTScore как альтернативу)"""
-    model = get_bleurt_model()
-
-    if model is None:
-        print("⚠️ BLEURT недоступен, возвращаем 0")
-        return 0.0
-
-    try:
-        # BERTScore возвращает precision, recall, F1
-        P, R, F1 = model.score(predictions, references)
-        return float(F1.mean())
-    except Exception as e:
-        print(f"⚠️ Ошибка при расчете BLEURT: {e}")
-        return 0.0
-
-_bge_model = None
-
 
 def get_bge_model():
     """Загружает BGE-M3 модель для semantic similarity"""
@@ -82,19 +62,3 @@ def calculate_semantic_similarity(
         similarities.append(sim)
 
     return float(np.mean(similarities)), similarities
-
-
-def calculate_semantic_answer_similarity(
-        predictions: List[str],
-        references: List[str]
-) -> dict:
-    """Полная метрика SemanticAnswerSimilarity"""
-    avg_sim, similarities = calculate_semantic_similarity(predictions, references)
-
-    return {
-        'average': avg_sim,
-        'min': float(np.min(similarities)),
-        'max': float(np.max(similarities)),
-        'std': float(np.std(similarities)),
-        'scores': similarities
-    }

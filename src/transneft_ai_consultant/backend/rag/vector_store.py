@@ -1,6 +1,7 @@
 import chromadb
 import hashlib
 
+from pathlib import Path
 from typing import List
 from src.transneft_ai_consultant.backend.rag.embedder import embed_texts
 from tqdm import tqdm
@@ -17,7 +18,8 @@ def query_documents_cached(question_hash: str, top_k: int):
 _query_cache = {}
 
 # Клиент будет сохранять данные в папку db/chroma
-client = chromadb.PersistentClient(path="db/chroma")
+BASE_DIR = Path(__file__).parent.parent
+client = chromadb.PersistentClient(path=str(BASE_DIR / "db" / "chroma"))
 
 # Получаем или создаем коллекцию. Имя соответствует вашему плану.
 collection = client.get_or_create_collection(

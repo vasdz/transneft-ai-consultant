@@ -1,6 +1,7 @@
 from rank_bm25 import BM25Okapi
 from typing import List
 import numpy as np
+import razdel
 from .vector_store import query_documents, collection
 
 _bm25_index = None
@@ -28,7 +29,10 @@ def build_bm25_index():
     _doc_ids = all_results['ids']
 
     # Токенизация для BM25
-    _bm25_corpus = [doc.lower().split() for doc in documents]
+    _bm25_corpus = [
+        [token.text.lower() for token in razdel.tokenize(doc)]
+        for doc in documents
+    ]
 
     # Создаём BM25 индекс
     _bm25_index = BM25Okapi(_bm25_corpus)
@@ -36,7 +40,7 @@ def build_bm25_index():
     print(f"[BM25] ✅ Индекс построен для {len(documents)} документов")
 
 
-def hybrid_search(question: str, top_k: int = 10, alpha: float = 0.7) -> list:
+def hybrid_search(question: str, top_k: int = 10, alpha: float = 0.5) -> list:
     """
     Комбинирует векторный поиск (Dense) и BM25 (Sparse).
 
@@ -55,10 +59,10 @@ def hybrid_search(question: str, top_k: int = 10, alpha: float = 0.7) -> list:
         return query_documents(question, top_k=top_k)
 
     # 2. Dense retrieval (векторный поиск)
-    dense_results = query_documents(question, top_k=top_k * 2)
+    dense_results = query_documents(question, top_k=top_k * 3)
 
     # 3. BM25 sparse retrieval
-    tokenized_query = question.lower().split()
+    tokenized_query = [token.text.lower() for token in razdel.tokenize(question)]
     bm25_scores = _bm25_index.get_scores(tokenized_query)
 
     # 4. Создаём маппинг doc_id -> scores

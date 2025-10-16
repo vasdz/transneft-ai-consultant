@@ -3,14 +3,6 @@ import uuid
 from .chunk_text import chunk_by_tokens, count_tokens
 
 def index_sections_to_chroma(sections, chroma_client, collection_name="transneft_docs"):
-    """
-    Индексирует секции документов в ChromaDB.
-
-    Args:
-        sections: список секций из parse_docx
-        chroma_client: клиент ChromaDB
-        collection_name: название коллекции
-    """
     collection = chroma_client.get_or_create_collection(collection_name)
 
     docs = []
@@ -24,7 +16,7 @@ def index_sections_to_chroma(sections, chroma_client, collection_name="transneft
             continue
 
         # Разбиваем на чанки
-        chunks = chunk_by_tokens(content, max_tokens=512, overlap=64)
+        chunks = chunk_by_tokens(content, max_tokens=400, overlap=80)
 
         for ci, chunk in enumerate(chunks):
             doc_id = f"{sec.get('section_id', uuid.uuid4().hex)}_{ci}"

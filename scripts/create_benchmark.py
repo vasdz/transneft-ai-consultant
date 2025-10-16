@@ -1,17 +1,21 @@
 import json
 import chromadb
 import random
+import sys
 
 from pathlib import Path
 from tqdm import tqdm
+
+project_root = Path(__file__).parent.parent.absolute()
+sys.path.insert(0, str(project_root))
 
 try:
     from backend.rag.llm import ask_llm
 except ImportError:
     from src.transneft_ai_consultant.backend.rag.llm import ask_llm
 
-NUM_QUESTIONS_TO_GENERATE = 100
-NUM_NEGATIVE_SAMPLES = 20
+NUM_QUESTIONS_TO_GENERATE = 30
+NUM_NEGATIVE_SAMPLES = 10
 
 
 # ===============================================
@@ -217,8 +221,14 @@ def main():
 
     # === 1. ПОДКЛЮЧЕНИЕ К БД ===
     print("\n[1/4] Подключение к ChromaDB...")
-    client = chromadb.PersistentClient(path="db/chroma")
-    collection = client.get_collection(name="transneft_docs")
+    BASE_DIR = Path(__file__).parent.parent  # корень проекта
+    client = chromadb.PersistentClient(path=str(BASE_DIR / "db"))
+    try:
+        collection = client.get_collection(name="transneft_docs")
+    except chromadb.errors.NotFoundError:
+        print("⚠️ Коллекция не найдена — используйте существующий benchmark.json")
+        import sys
+        sys.exit(1)
 
     all_docs = collection.get(include=["documents", "metadatas"])
     contexts = all_docs["documents"]
@@ -259,6 +269,8 @@ def main():
     # === 3. ДОБАВЛЕНИЕ НЕГАТИВНЫХ ПРИМЕРОВ ===
     print(f"\n[3/4] Генерация {NUM_NEGATIVE_SAMPLES} негативных примеров...")
     negative_samples = generate_negative_samples(NUM_NEGATIVE_SAMPLES)
+
+    Path("benchmarks").mkdir(exist_ok=True)
 
     # Сохраняем негативные примеры отдельно
     with open("benchmarks/negative_samples.json", "w", encoding="utf-8") as f:

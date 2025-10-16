@@ -44,6 +44,44 @@ python scripts/run_evaluation.py
 - Перед генерацией ответов используется `rag/question_filter.py` для фильтрации out‑of‑scope/unanswerable вопросов. При срабатывании возвращается `NO_ANSWER` вместо галлюцинации.
 - Рекомендуется считать precision/recall по классу `NO_ANSWER`.
 
+**Что создаётся:**
+- `benchmarks/evaluation_results.json` — детальные результаты для каждого вопроса
+- `benchmarks/final_metrics.json` — итоговые метрики QA и ранжирования
+
+**Структура `evaluation_results.json`:**
+[
+{
+"question": "Когда было основано ПАО «Транснефть»?",
+"ground_truth": "ПАО «Транснефть» было основано 26.08.1993.",
+"generated_answer": "Компания была зарегистрирована 26.08.1993 года.",
+"retrieved_docs": ["chunk_12", "chunk_45", "chunk_78"],
+"relevant_docs": ["chunk_12", "chunk_45"],
+"bleurt_score": 0.85,
+"rouge_l_score": 0.72,
+"sas_score": 0.88,
+"ndcg_at_5": 0.95,
+"mrr_at_10": 1.0,
+"map_at_100": 0.92
+},
+...
+]
+
+text
+
+**Структура `final_metrics.json`:**
+{
+"qa_metrics": {
+"bleurt": 0.7182,
+"rouge_l": 0.4429,
+"sas": 0.8256
+},
+"ranking_metrics": {
+"ndcg_at_5": 0.6601,
+"mrr_at_10": 0.6333,
+"map_at_100": 0.6000
+}
+}
+
 ## Улучшение показателей
 - Retriever:
   - Увеличить `TOP_K_RETRIEVER` в `.env`.

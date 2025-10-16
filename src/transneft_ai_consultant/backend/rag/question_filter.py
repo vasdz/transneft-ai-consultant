@@ -84,48 +84,6 @@ def get_semantic_model():
 # ПРОВЕРКИ
 # ═══════════════════════════════════════════════════════════════════════════
 
-def check_blacklist(question: str) -> Tuple[bool, str]:
-    """Проверка на чёрный список."""
-    question_lower = question.lower()
-
-    # 1. Категории
-    for category, keywords in BLACKLIST_CATEGORIES.items():
-        for keyword in keywords:
-            if keyword in question_lower:
-                return False, f"blacklist_{category}"
-
-    # 2. Токсичные паттерны
-    for pattern in TOXIC_PATTERNS:
-        if re.search(pattern, question_lower):
-            return False, "toxic_pattern"
-
-    return True, ""
-
-
-def check_whitelist(question: str) -> Tuple[bool, float]:
-    """
-    Проверка на белый список.
-    Returns: (passed, score) где score = % совпадений с белым списком
-    """
-    question_lower = question.lower()
-
-    total_keywords = sum(len(kws) for kws in WHITELIST_KEYWORDS.values())
-    matched_keywords = 0
-
-    for category, keywords in WHITELIST_KEYWORDS.items():
-        for keyword in keywords:
-            if keyword in question_lower:
-                matched_keywords += 1
-
-    score = matched_keywords / total_keywords if total_keywords > 0 else 0
-
-    # Если вопрос длинный (>5 слов) и нет ключевых слов - блокируем
-    words = question_lower.split()
-    if len(words) >= 5 and score == 0:
-        return False, score
-
-    return True, score
-
 
 def check_semantic_similarity(question: str, threshold: float = 0.4) -> Tuple[bool, float]:
     """

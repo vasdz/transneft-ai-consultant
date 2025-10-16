@@ -11,14 +11,36 @@ print("Инициализация метрик...")
 _bleurt = load("bleurt", "BLEURT-20")
 _sas_model = SentenceTransformer('BAAI/bge-m3')
 # Инициализируем морфологический анализатор для русского языка
-morph = pymorphy2.MorphAnalyzer()
-print("Метрики инициализированы.")
+print("Метрики инициализированы (pymorphy2 будет инициализирован при первом использовании).")
+_morph_instance = None
+
+def get_morph():
+    """Ленивая инициализация pymorphy2 с обработкой ошибок."""
+    global _morph_instance
+    if _morph_instance is None:
+        try:
+            import inspect
+            # Патч для Python 3.11+
+            if not hasattr(inspect, 'getargspec'):
+                inspect.getargspec = inspect.getfullargspec
+            _morph_instance = pymorphy2.MorphAnalyzer()
+        except Exception as e:
+            print(f"⚠️ pymorphy2 недоступен: {e}. Используется простая токенизация.")
+            _morph_instance = None
+    return _morph_instance
 
 
 def stem_text_russian(text: str) -> str:
     """Токенизирует текст и приводит слова к нормальной форме (лемматизация)."""
     tokens = [token.text for token in razdel.tokenize(text.lower())]
-    lemmas = [morph.parse(token)[0].normal_form for token in tokens]
+
+    morph = get_morph()
+    if morph:
+        lemmas = [morph.parse(token)[0].normal_form for token in tokens]
+    else:
+        # Фоллбэк без морфологии
+        lemmas = tokens
+
     return " ".join(lemmas)
 
 
@@ -29,9 +51,32 @@ def calculate_bleurt(predictions: List[str], references: List[str]) -> float:
     return sum(results['scores']) / len(results['scores'])
 
 
+def initialize_metrics():
+    """Инициализация всех метрик (уже происходит при импорте)."""
+    print("✅ Метрики инициализированы")
+
+
+def calculate_all_metrics(references: List[str], predictions: List[str]) -> dict:
+    """Расчёт всех метрик генерации."""
+    print("Расчет BLEURT...")
+    bleurt_score = calculate_bleurt(predictions, references)
+
+    print("Расчет ROUGE-L...")
+    rouge_score = calculate_rouge_l_russian(predictions, references)
+
+    print("Расчет Semantic Similarity...")
+    sas_score = calculate_sas(predictions, references)
+
+    return {
+        "bleurt": round(bleurt_score, 4),
+        "rouge_l": round(rouge_score, 4),
+        "sas": round(sas_score, 4)
+    }
+
+
 def calculate_rouge_l_russian(predictions: List[str], references: List[str]) -> float:
-    """Расчет ROUGE-L с лемматизацией для русского языка."""
-    if not predictions or not references: return 0.0
+    if not predictions or not references:
+        return 0.0
 
     scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=False)
     total_f_score = 0.0
@@ -40,8 +85,8 @@ def calculate_rouge_l_russian(predictions: List[str], references: List[str]) -> 
         pred_lemmatized = stem_text_russian(pred)
         ref_lemmatized = stem_text_russian(ref)
 
-        scores = scorer._score_lcs(ref_lemmatized.split(), pred_lemmatized.split())
-        total_f_score += scores.fmeasure
+        score = scorer.score(ref_lemmatized, pred_lemmatized)['rougeL'].fmeasure
+        total_f_score += score
 
     return total_f_score / len(predictions)
 
