@@ -8,6 +8,29 @@ logger = logging.getLogger(__name__)
 
 
 class SpeechToText:
+    """Класс для распознавания речи с помощью Whisper (on-premise)."""
+
+    def __init__(self, model_size: str = "base", device: str = "auto"):
+        """
+        Инициализация STT модели.
+
+        Args:
+            model_size: Размер модели Whisper (tiny/base/small/medium/large)
+            device: Устройство для инференса (auto/cpu/cuda)
+        """
+        if device == "auto":
+            try:
+                import torch
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            except ImportError:
+                device = "cpu"
+
+        self.device = device
+        self.model_size = model_size
+
+        logger.info(f"[STT] Загрузка OpenAI Whisper '{model_size}' на {device}...")
+        self.model = whisper.load_model(model_size, device=device)
+        logger.info(f"[STT] OpenAI Whisper '{model_size}' готова к работе (device={device})")
 
     def _is_garbage_text(self, text: str) -> bool:
         """Проверка на мусорный текст."""
@@ -29,6 +52,7 @@ class SpeechToText:
         return False
 
     def transcribe_file(self, audio_path: str, language: str = "ru", initial_prompt: str = None) -> dict:
+        """Транскрибирование аудиофайла в текст."""
         logger.info(f"[STT] Транскрибирование файла: {audio_path}")
 
         if initial_prompt is None and language == "ru":
@@ -83,7 +107,10 @@ class SpeechToText:
                 "error": str(e),
             }
 
+
+# ===== SINGLETON PATTERN =====
 _stt_instance = None
+
 
 def get_stt_instance(model_size: str = "base", device: str = "auto") -> SpeechToText:
     """Получить глобальный экземпляр STT (singleton pattern)."""

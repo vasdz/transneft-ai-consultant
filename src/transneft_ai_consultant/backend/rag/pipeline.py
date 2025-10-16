@@ -221,7 +221,7 @@ def rag_answer(question: str, use_reranking: bool = True, log_demo: bool = True)
 
     # 6. Генерация ответа
     print(f"\nГенерация ответа LLM...")
-    answer = ask_llm(prompt, max_tokens=512, temperature=0.3)
+    answer = ask_llm(prompt, max_tokens=350, temperature=0.3)
     print(f"Ответ получен: {len(answer)} символов")
     print(f"{'=' * 60}\n")
 
