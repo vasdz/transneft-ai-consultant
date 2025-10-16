@@ -77,10 +77,10 @@ env/
 # ==========================================
 
 # ChromaDB
-db/chroma/
-*.db
-*.sqlite
-*.sqlite3
+# db/chroma/
+# *.db
+# *.sqlite
+# *.sqlite3
 
 # ==========================================
 # MODELS (Large Files)
@@ -123,11 +123,11 @@ src/transneft_ai_consultant/backend/data/processed/
 # ==========================================
 
 # Benchmark results
-benchmarks/*.json
+# benchmarks/*.json
 !benchmarks/.gitkeep
 
 # Evaluation results
-results/*.json
+# results/*.json
 !results/.gitkeep
 
 # ==========================================
